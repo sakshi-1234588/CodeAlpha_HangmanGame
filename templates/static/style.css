@@ -1,0 +1,88 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.word span {
+    font-size: 2rem;
+    margin: 0 5px;
+    border-bottom: 2px solid #333;
+    display: inline-block;
+    width: 30px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.wrong-letters p,
+.attempts p {
+    font-size: 1.1rem;
+    color: #ff0000;
+}
+
+.letters-form {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.letters-form button {
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.letters-form button:hover {
+    background: #555;
+}
+
+.letters-form button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background: #555;
+}
+
+.message {
+    color: green;
+    margin-top: 20px;
+}
