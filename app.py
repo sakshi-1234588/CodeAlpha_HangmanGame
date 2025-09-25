@@ -8,7 +8,6 @@ app.secret_key = "secret123"
 # Word list
 words = ["python", "hangman", "simple", "coding", "random"]
 
-# Start new game
 def new_game():
     word = random.choice(words).upper()
     session['word'] = word
@@ -16,14 +15,13 @@ def new_game():
     session['attempts'] = 6
     session['wrong_letters'] = []
 
-# Home route
 @app.route("/", methods=["GET", "POST"])
 def index():
     if 'word' not in session:
         new_game()
-    
+
     message = ""
-    
+
     if request.method == "POST":
         letter = request.form['letter'].upper()
         if letter not in session['guessed']:
@@ -39,12 +37,16 @@ def index():
 
     display_word = [ch if ch in session['guessed'] else "_" for ch in session['word']]
     letters = list(string.ascii_uppercase)
-    hangman_stage = 6 - session["attempts"]
-    
-    return render_template("index.html", display_word=display_word, attempts=session['attempts'],
-                           wrong=session['wrong_letters'], letters=letters, message=message, stage=hangman_stage)
 
-# Reset game
+    return render_template(
+        "index.html",
+        display_word=display_word,
+        attempts=session['attempts'],
+        wrong=session['wrong_letters'],
+        letters=letters,
+        message=message
+    )
+
 @app.route("/reset")
 def reset():
     new_game()

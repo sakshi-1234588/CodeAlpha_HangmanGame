@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Hangman Game</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-<h1>Hangman Game</h1>
-<div class="game-container">
-    <div class="hangman">
-        <div class="gallow"></div>
-        {% if stage > 0 %}<div class="head"></div>{% endif %}
-        {% if stage > 1 %}<div class="body"></div>{% endif %}
-        {% if stage > 2 %}<div class="left-arm"></div>{% endif %}
-        {% if stage > 3 %}<div class="right-arm"></div>{% endif %}
-        {% if stage > 4 %}<div class="left-leg"></div>{% endif %}
-        {% if stage > 5 %}<div class="right-leg"></div>{% endif %}
-    </div>
-    
-    <p class="word">{{ display_word|join(" ") }}</p>
-    <p>Attempts Left: {{ attempts }}</p>
-    <p>Wrong Letters: {{ wrong|join(", ") }}</p>
+    <div class="container">
+        <h1>🎯 Hangman Game</h1>
 
-    {% if message %}
-        <h2 class="message">{{ message }}</h2>
-        <a href="{{ url_for('reset') }}" class="btn">Play Again</a>
-    {% else %}
-        <form method="POST" class="letters-form">
-            {% for letter in letters %}
-                {% if letter not in display_word and letter not in wrong %}
-                    <button type="submit" name="letter" value="{{ letter }}">{{ letter }}</button>
-                {% else %}
-                    <button type="button" disabled>{{ letter }}</button>
-                {% endif %}
+        <!-- ❌ Hangman image section removed -->
+
+        <div class="word">
+            {% for ch in display_word %}
+                <span>{{ ch }}</span>
             {% endfor %}
-        </form>
-    {% endif %}
-</div>
+        </div>
+
+        <div class="wrong-letters">
+            <p>Wrong Letters: {{ wrong | join(', ') }}</p>
+        </div>
+
+        <div class="attempts">
+            <p>Attempts Left: {{ attempts }}</p>
+        </div>
+
+        {% if message %}
+            <h2 class="message">{{ message }}</h2>
+            <a href="{{ url_for('reset') }}" class="btn">Play Again</a>
+        {% else %}
+            <form method="POST" class="letters-form">
+                {% for letter in letters %}
+                    <button type="submit" name="letter" value="{{ letter }}" 
+                        {% if letter in session['guessed'] %} disabled {% endif %}>
+                        {{ letter }}
+                    </button>
+                {% endfor %}
+            </form>
+        {% endif %}
+    </div>
 </body>
 </html>
