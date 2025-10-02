@@ -5,12 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hangman Game</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        // Page load var game start karayla
+        function startGame() {
+            // Agar message aahe (win/loss) tar Play Again button dakhva
+            const message = document.querySelector(".message");
+            if(message) return;
+
+            // Submit first random letter automatically (optional) ya line remove pan karu shakta
+            //document.querySelector(".letters-form button:not([disabled])").click();
+        }
+    </script>
 </head>
-<body>
+<body onload="startGame()">
     <div class="container">
         <h1>🎯 Hangman Game</h1>
-
-        <!-- ❌ Hangman image section removed -->
 
         <div class="word">
             {% for ch in display_word %}
